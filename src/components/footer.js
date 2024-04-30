@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <div className="w-full border-t-2 border-x-2 border-[#27272a] rounded-t-xl p-5 grid md:grid-cols-2 grid-cols-1">
+        <div className="w-full border-2 border-[#27272a] rounded-t-xl p-5 grid md:grid-cols-2 grid-cols-1">
             <div className="w-full flex md:justify-center">
                 <div className="mx-auto">
                     <h2 className="text-3xl font-bold">Kontakt</h2>
