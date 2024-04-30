@@ -18,13 +18,14 @@ const getData = async () => {
         if (!res.ok) {
             console.log("elo")
             console.log("Błąd pobierania danych")
-            return []
+            return false
         }
         const data = await res.json() || []
         console.log(data)
         return data
     } catch (e) {
         console.log(e)
+        return false
     }
 }
 export default async function page() {
@@ -59,11 +60,18 @@ export default async function page() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {data.length > 0 && data.map((item, index) => (
+                        {data && data.length > 0 && data.map((item, index) => (
                             <Dashboardtablerow key={item.key} item={item} index={index}/>
                         ))}
                     </TableBody>
                 </Table>
+                {
+                    !data ? (<div className="text-center py-4">
+                        błąd pobierania postów
+                    </div>) : data.length === 0 && (<div className="text-center py-4">
+                        brak ogłoszeń
+                    </div>)
+                }
             </div>
         </div>
     )
