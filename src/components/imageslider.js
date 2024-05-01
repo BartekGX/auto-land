@@ -43,11 +43,11 @@ export default function ImageSlider({ urls }) {
     return (
         <div
             className="relative aspect-video group overflow-hidden aspect-w-16 aspect-h-9 w-full"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
         >
-            <div className="flex h-full w-full overflow-hidden rounded-lg relative">
+            <div className="flex h-full w-full overflow-hidden rounded-lg relative"
+                 onTouchStart={handleTouchStart}
+                 onTouchMove={handleTouchMove}
+                 onTouchEnd={handleTouchEnd}>
                 {transformedUrls.map((image, index) => {
                     return (
                         <div
