@@ -18,10 +18,8 @@ module.exports = {
     },
     extend: {
       screens: {
-        "xmd": "900px"
-      },
-      gridTemplateColumns: {
-        "auto/400": "auto-fit 400px"
+        "xmd": "900px",
+        "customlg": "1350px",
       },
       colors: {
         border: "hsl(var(--border))",

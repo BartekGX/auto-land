@@ -30,7 +30,7 @@ export default async function page({ params }) {
     const data = await getData(name)
 
     return (
-        <div className="flex relative p-3 gap-2 md:flex-row flex-col-reverse w-full">
+        <div className="flex relative sm:px-3 px-0 py-3 gap-2 md:flex-row flex-col-reverse w-full">
             {data ? (
                 <div className="grid lg:grid-cols-[1fr_400px] grid-cols-1 gap-3 w-full">
                     <div className="w-full flex flex-col gap-2 row-start-2 lg:row-start-auto">

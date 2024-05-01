@@ -42,7 +42,7 @@ export default function ImageSlider({ urls }) {
 
     return (
         <div
-            className="relative sm:h-[500px] xs:h-[250px] md:w- w-auto aspect-video group overflow-hidden aspect-w-16 aspect-h-9"
+            className="relative aspect-video group overflow-hidden aspect-w-16 aspect-h-9 w-full"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
