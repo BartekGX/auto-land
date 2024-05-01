@@ -38,6 +38,50 @@ export default async function page({ params }) {
                             <ImageSlider urls={data.photos} />
                             {/*<Simpleimagesliderclient photos={data.photos}/>*/}
                         </Card>
+                        <Card className="w-full lg:hidden">
+                            <CardHeader>
+                                <CardTitle>{data.name === "" ? "brak nazwy" : data.name }</CardTitle>
+                                <div className="flex flex-wrap flex-col">
+                                    <span className="text-gray-400 text-lg">cena</span>
+                                    <p className="font-medium text-2xl whitespace-nowrap">{data.info.price.toLocaleString()} zł</p>
+                                </div>
+                            </CardHeader>
+                            <CardContent className="grid grid-cols-2">
+                                <div className="flex flex-wrap flex-col">
+                                    <span className="text-gray-400">rok produkcji</span>
+                                    <p className="font-medium">{data.info.year}</p>
+                                </div>
+                                <div className="flex flex-wrap flex-col">
+                                    <span className="text-gray-400">przebieg</span>
+                                    <p className="font-medium">{data.info.process.toLocaleString()} km</p>
+                                </div>
+                                <div className="flex flex-wrap flex-col">
+                                    <span className="text-gray-400">moc silnika</span>
+                                    <p className="font-medium">{data.info.power} KM</p>
+                                </div>
+                                <div className="flex flex-wrap flex-col">
+                                    <span className="text-gray-400">pojemność silnika</span>
+                                    <p className="font-medium">{data.info.capacity} cm<sup>3</sup></p>
+                                </div>
+                                <div className="flex flex-wrap flex-col">
+                                    <span className="text-gray-400">rodzaj paliwa</span>
+                                    <p className="font-medium">{data.info.fuel === "" ? "brak" : data.info.drive}</p>
+                                </div>
+                                <div className="flex flex-wrap flex-col">
+                                    <span className="text-gray-400">napęd</span>
+                                    <p className="font-medium">{data.info.drive === "" ? "brak" : data.info.drive}</p>
+                                </div>
+                                {data.moreInfo.map((item, index) => (
+                                    item.name && item.value && (
+                                        <div key={item.name + index} className="flex flex-wrap flex-col">
+                                            <span className="text-gray-400">{item.name}</span>
+                                            <p className="font-medium">{item.value}</p>
+                                        </div>
+                                    )
+                                ))}
+
+                            </CardContent>
+                        </Card>
                         <Card>
                             <CardHeader>
                                 <CardTitle>
@@ -52,7 +96,7 @@ export default async function page({ params }) {
                         </Card>
                     </div>
                     <div className=" h-full">
-                        <Card className="lg:w-[400px] w-full lg:sticky lg:top-2">
+                        <Card className="lg:w-[400px] w-full lg:sticky lg:top-2 lg:block hidden">
                             <CardHeader>
                                 <CardTitle>{data.name}</CardTitle>
                                 <div className="flex flex-wrap flex-col">
