@@ -49,7 +49,7 @@ export async function POST(req) {
                 .toFormat('jpg')
                 .toBuffer();
             console.log(newFileName)
-            const fileName = await uploadFileToS3(processedImage, newFileName);
+            // const fileName = await uploadFileToS3(processedImage, newFileName);
             console.log(fileName)
             fileNames.push(fileName)
             console.log("fileNames", fileNames)

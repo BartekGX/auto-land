@@ -58,8 +58,8 @@ export async function DELETE(req) {
     const photosToDelete = photos.concat(photo)
     console.log(photosToDelete)
     try {
-        // await connectDB()
-        // await  Offer.findOneAndDelete({ reference: reference })
+        await connectDB()
+        await  Offer.findOneAndDelete({ reference: reference })
 
         for (const photoToDelete of photosToDelete) {
             console.log("zdjecie", photoToDelete)

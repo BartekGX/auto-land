@@ -69,13 +69,13 @@ export default function ImageSlider({ urls }) {
             </div>
             <button
                 onClick={showPrevImg}
-                className="z-20 absolute group-hover:sm:translate-x-[32px] -left-[32px] translate-x-[32px] transition-transform h-full flex top-0 justify-center items-center bg-black bg-opacity-50 p-1"
+                className="z-20 absolute group-hover:sm:translate-x-[32px] -left-[32px] translate-x-[32px] h-full flex top-0 justify-center items-center bg-black bg-opacity-50 p-1 opacity-50 hover:opacity-100 transition-all"
             >
                 <ChevronLeftIcon className="h-6 w-6 text-white" />
             </button>
             <button
                 onClick={showNextImg}
-                className="z-20 absolute group-hover:sm:-translate-x-[32px] -right-[32px] -translate-x-[32px] transition-transform h-full flex top-0 justify-center items-center bg-black bg-opacity-50 p-1"
+                className="z-20 absolute group-hover:sm:-translate-x-[32px] -right-[32px] -translate-x-[32px] h-full flex top-0 justify-center items-center bg-black bg-opacity-50 p-1 opacity-50 hover:opacity-100 transition-all"
             >
                 <ChevronRightIcon className="h-6 w-6 text-white" />
             </button>

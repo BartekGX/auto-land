@@ -123,11 +123,11 @@ export default async function page({ params }) {
                                     </div>
                                     <div className="flex flex-wrap flex-col">
                                         <span className="text-gray-400">rodzaj paliwa</span>
-                                        <p className="font-medium">{data.info.fuel}</p>
+                                        <p className="font-medium">{data.info.fuel === "" ? "brak" : data.info.drive}</p>
                                     </div>
                                     <div className="flex flex-wrap flex-col">
                                         <span className="text-gray-400">napęd</span>
-                                        <p className="font-medium">{data.info.drive}</p>
+                                        <p className="font-medium">{data.info.drive === "" ? "brak" : data.info.drive}</p>
                                     </div>
                                 {data.moreInfo.map((item, index) => (
                                     item.name && item.value && (
