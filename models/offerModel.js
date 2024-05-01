@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 
 const offerSchema= new mongoose.Schema({
         reference: String,
+        photo: String,
         name: String,
         info: {
             price: { type: Number, default: 0 },

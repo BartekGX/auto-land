@@ -12,12 +12,11 @@ const s3Client = new S3Client({
 })
 
 async function uploadFileToS3(file, filename) {
-    const fileBuffer = file
 
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
         Key: filename,
-        Body: fileBuffer,
+        Body: file,
         ContentType: "image/jpg"
     }
     const command = new PutObjectCommand(params);
@@ -27,8 +26,10 @@ async function uploadFileToS3(file, filename) {
 
 export async function POST(req) {
     try {
+        let fileNames = []
         const data = await req.formData();
         const files = data.getAll("file");
+        console.log("przysłane pliki", files)
         for (const file of files) {
             const extension = file.name.split('.').pop();
             const oldName = file.name.split('.')
@@ -42,17 +43,20 @@ export async function POST(req) {
                 .toFormat('jpg')
                 .toBuffer();
             console.log(newFileName)
-            // const fileName = await uploadFileToS3(processedImage, newFileName);
-
+            const fileName = await uploadFileToS3(processedImage, newFileName);
+            console.log(fileName)
+            fileNames.push(fileName)
+            console.log("fileNames", fileNames)
         }
-        if (!file) return NextResponse.json( { error: "File is required."}, { status: 400 })
+        if (!files) return NextResponse.json( { error: "File is required."}, { status: 400 })
 
 
 
 
 
-        return NextResponse.json({ success: true, fileName})
+        return NextResponse.json({ success: true, fileNames})
     } catch (e) {
+        console.log(e)
         return NextResponse.json({ error: "Error uplading file"})
     }
 }
@@ -64,7 +68,7 @@ export async function DELETE(req) {
     }
     try {
         const command = new DeleteObjectCommand(params);
-        // await s3Client.send(command)
+        await s3Client.send(command)
         return NextResponse.json({message: "deleted"}, { status: 200 })
     } catch (e) {
         console.log("error", e)

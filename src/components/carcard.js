@@ -4,10 +4,15 @@ import Image from "next/image";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 
+const S3BucketName = process.env.AWS_S3_BUCKET_NAME;
+const S3Region = process.env.AWS_S3_REGION;
 const neue = Bebas_Neue({ subsets: ["latin"], weight: "400" });
-export default function Carcard({ reference , name = "brak nazwy", price = 0, yearProduction = "brak", process = 0, power = 0, engineSize = 0, fuel = "brak", drive = "brak", isSold}) {
+export default function Carcard({ reference , name = "brak nazwy", price = 0, yearProduction = "brak", process = 0, power = 0, engineSize = 0, fuel = "brak", drive = "brak", isSold, photo}) {
+
+    const photoURL = `https://${S3BucketName}.s3.${S3Region}.amazonaws.com/${photo}`
+
     return (
-        <Card className=" max-w-[350px] w-full relative overflow-hidden">
+        <Card className=" max-w-[350px] w-full relative overflow-hidden flex flex-col justify-between">
             {isSold &&
             <div className={neue.className + " absolute w-full h-full backdrop-blur-sm hover:backdrop-blur-none hover:opacity-10 transition-all"}>
                 <div className="absolute bg-black text-white flex flex-row flex-nowrap w-full text-center rotate-[6deg] top-[10%] text-3xl whitespace-nowrap"><div className="-translate-x-[10px] tracking-wider">SOLD OUT  SOLD OUT  SOLD OUT  SOLD OUT  SOLD OUT</div></div>
@@ -18,11 +23,11 @@ export default function Carcard({ reference , name = "brak nazwy", price = 0, ye
             }
 
             <CardHeader>
-                <Image src="https://www.carscollection.pl/wp-content/uploads/elementor/thumbs/IMG_6170-qlhjeovoaaxqfnh25bkz12bvxcqcb1qgh89g5lfav8.jpg" alt="Alfa Romeo Stelvio 2.0 Turbo Executive Q4" className="rounded-lg w-full" width={200} height={200}/>
+                <Image src={photoURL} alt="Alfa Romeo Stelvio 2.0 Turbo Executive Q4" className="rounded-lg w-full" width={200} height={200}/>
             </CardHeader>
             <CardContent>
                 <CardTitle>{name}</CardTitle>
-                <div className="flex flex-col justify-between h-full">
+                <div>
                     <div>
                         <div className="flex py-4 flex-wrap flex-col">
                             <span className="text-gray-400">cena</span>
@@ -35,7 +40,7 @@ export default function Carcard({ reference , name = "brak nazwy", price = 0, ye
                             </div>
                             <div className="flex flex-wrap flex-col">
                                 <span className="text-gray-400">przebieg</span>
-                                <p className="font-medium">{process} KM</p>
+                                <p className="font-medium">{process} km</p>
                             </div>
                             <div className="flex flex-wrap flex-col">
                                 <span className="text-gray-400">moc</span>

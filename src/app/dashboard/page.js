@@ -1,13 +1,6 @@
-import {
-    Table,
-    TableBody,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import Link from 'next/link'
-import Dashboardtablerow from "@/components/dashboardtablerow";
+import Dashboardtable from "@/components/dashboardtable";
 const getData = async () => {
     const apiURL = process.env.API_URL
     try {
@@ -16,13 +9,10 @@ const getData = async () => {
             cache: "no-store"
         })
         if (!res.ok) {
-            console.log("elo")
             console.log("Błąd pobierania danych")
             return false
         }
-        const data = await res.json() || []
-        console.log(data)
-        return data
+        return await res.json() || []
     } catch (e) {
         console.log(e)
         return false
@@ -48,23 +38,7 @@ export default async function page() {
 
             </div>
             <div>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead className="w-[60px] text-center">Lp.</TableHead>
-                            <TableHead>Nazwa</TableHead>
-                            <TableHead className="w-[250px] text-center">Cena</TableHead>
-                            <TableHead className="text-center">Publiczny</TableHead>
-                            <TableHead className="text-center w-[100px]">Sprzedany</TableHead>
-                            <TableHead className="text-center">opcje</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {data && data.length > 0 && data.map((item, index) => (
-                            <Dashboardtablerow key={item.key} item={item} index={index}/>
-                        ))}
-                    </TableBody>
-                </Table>
+               <Dashboardtable _data={data}/>
                 {
                     !data ? (<div className="text-center py-4">
                         błąd pobierania postów

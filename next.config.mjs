@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ['www.carscollection.pl'],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'autoland-storage.s3.eu-central-1.amazonaws.com',
+                port: '',
+                pathname: '/*',
+            },
+        ],
     },
 };
 

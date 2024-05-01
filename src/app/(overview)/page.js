@@ -3,7 +3,7 @@ import Carcard from "@/components/carcard";
 const getData = async () => {
     const apiURL = process.env.API_URL
     try {
-        const res = await fetch(`${apiURL}/api/offer`, {
+        const res = await fetch(`${apiURL}/api/offeru`, {
             method: "GET",
             cache: "no-store"
         })
@@ -33,7 +33,7 @@ export default async function Home() {
                 </div>
                 {data.length > 0 ? (
                 <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 m-2">
-                    {data.map(item => <Carcard key={item.id} reference={item.reference} name={item.name} price={item.info.price.toLocaleString()} yearProduction={item.info.year} process={item.info.process.toLocaleString()} power={item.info.power} engineSize={item.info.capacity} fuel={item.info.fuel} drive={item.info.drive} isSold={item.isSold}/>)}
+                    {data.map(item => <Carcard key={item.id} reference={item.reference} name={item.name} price={item.info.price.toLocaleString()} yearProduction={item.info.year} process={item.info.process.toLocaleString()} power={item.info.power} engineSize={item.info.capacity} fuel={item.info.fuel} drive={item.info.drive} isSold={item.isSold} photo={item.photo}/>)}
                 </div>
                 ) : (
                     <div className="w-full">

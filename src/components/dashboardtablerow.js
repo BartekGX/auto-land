@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import {useState} from "react";
 
-export default function Dashboardtablerow({ item, index }) {
+export default function Dashboardtablerow({ item, index, setData }) {
     const [isPublic, setIsPublic] = useState(item.isPublic)
     const [isSold, setIsSold] = useState(item.isSold)
     const handleChangeIsPubic = async () => {
@@ -45,6 +45,27 @@ export default function Dashboardtablerow({ item, index }) {
             setIsSold(!prevState)
         } catch (e) {
             console.log("błąd edytowania")
+        }
+    }
+    const deleteOffer = (reference, photo, photos) => {
+        console.log("test", reference)
+        const toDelete = {
+            reference, photo, photos
+        }
+        console.log(toDelete)
+        try {
+            const res = fetch(`/api/offer`, {
+                method: "DELETE",
+                body: JSON.stringify(toDelete)
+            })
+            if (!res.ok) {
+                console.log("błąd usuwania oferty");
+            }
+            setData(prevState => {
+                return prevState.filter(_item => _item.reference !== reference)
+            })
+        } catch (e) {
+            console.log("błąd usuwania oferty")
         }
     }
     return (
@@ -85,7 +106,7 @@ export default function Dashboardtablerow({ item, index }) {
                     </AlertDialogDescription>
                     <AlertDialogFooter className="flex gap-2 w-full justify-end">
                         <AlertDialogCancel>anuluj</AlertDialogCancel>
-                        <AlertDialogAction>usuń</AlertDialogAction>
+                        <AlertDialogAction onClick={() => deleteOffer(item.reference, item.photo, item.photos)}>usuń</AlertDialogAction>
                     </AlertDialogFooter>
 
                 </AlertDialogContent>

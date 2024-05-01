@@ -2,11 +2,12 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import parser from "html-react-parser"
 import "../../../components/tiptapstyle.css"
 import Link from "next/link";
+import ImageSlider from "@/components/imageslider";
 
 const getData = async (name) => {
     const apiURL = process.env.API_URL
     try {
-        const res = await fetch(`${apiURL}/api/offer/${name}`, {
+        const res = await fetch(`${apiURL}/api/offeru/${name}`, {
             method: "GET",
             cache: "no-store"
         })
@@ -26,12 +27,12 @@ export default async function page({ params }) {
     const { name } = params
     const data = await getData(name)
     return (
-        <div className="flex relative p-3 gap-2">
+        <div className="flex relative p-3 gap-2 sm:flex-row flex-col-reverse">
             {data ? (
                 <>
-                    <div className="w-full flex flex-col gap-2">
-                        <Card className="h-[500px]">
-                            zdjęcia
+                    <div className="w-full flex flex-col gap-2 ">
+                        <Card>
+                            <ImageSlider urls={data.photos} />
                         </Card>
                         <Card>
                             <CardHeader>
@@ -46,8 +47,8 @@ export default async function page({ params }) {
                             </CardContent>
                         </Card>
                     </div>
-                    <div className="sticky top-2 h-full">
-                        <Card className="w-[400px]">
+                    <div className="sm:sticky sm:top-2 sm:h-full">
+                        <Card className="sm:w-[400px] w-full">
                             <CardHeader>
                                 <CardTitle>{data.name}</CardTitle>
                                 <CardDescription className="text-xl mt-4">{data.info.price.toLocaleString()} zł</CardDescription>
