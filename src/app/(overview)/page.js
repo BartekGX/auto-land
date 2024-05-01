@@ -23,9 +23,9 @@ export default async function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center">
             <div className="w-full max-w-[1100px]">
-                <div className="flex justify-between w-full items-end py-2 border-[#27272a]">
+                <div className="flex justify-between w-full items-end py-2 border-[#27272a] md:px-0 px-1">
                     <div>
-                    <h1 className="text-5xl font-bold py-3">Samochody</h1>
+                    <h1 className="md:text-5xl sm:text-2xl text-lg font-bold py-3">Samochody</h1>
                     </div>
                     <div>
                         ilość {data.length}

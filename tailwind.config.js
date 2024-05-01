@@ -20,6 +20,9 @@ module.exports = {
       screens: {
         "xmd": "900px"
       },
+      gridTemplateColumns: {
+        "auto/400": "auto-fit 400px"
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

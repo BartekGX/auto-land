@@ -3,6 +3,8 @@ import parser from "html-react-parser"
 import "../../../components/tiptapstyle.css"
 import Link from "next/link";
 import ImageSlider from "@/components/imageslider";
+import SimpleImageSlider from "react-simple-image-slider";
+import Simpleimagesliderclient from "@/components/simpleimagesliderclient";
 
 const getData = async (name) => {
     const apiURL = process.env.API_URL
@@ -26,13 +28,15 @@ const getData = async (name) => {
 export default async function page({ params }) {
     const { name } = params
     const data = await getData(name)
+
     return (
-        <div className="flex relative p-3 gap-2 sm:flex-row flex-col-reverse">
+        <div className="flex relative p-3 gap-2 md:flex-row flex-col-reverse w-full">
             {data ? (
-                <>
-                    <div className="w-full flex flex-col gap-2 ">
-                        <Card>
+                <div className="grid lg:grid-cols-[1fr_400px] grid-cols-1 gap-3 w-full">
+                    <div className="w-full flex flex-col gap-2 row-start-2 lg:row-start-auto">
+                        <Card className="flex justify-center">
                             <ImageSlider urls={data.photos} />
+                            {/*<Simpleimagesliderclient photos={data.photos}/>*/}
                         </Card>
                         <Card>
                             <CardHeader>
@@ -47,15 +51,18 @@ export default async function page({ params }) {
                             </CardContent>
                         </Card>
                     </div>
-                    <div className="sm:sticky sm:top-2 sm:h-full">
-                        <Card className="sm:w-[400px] w-full">
+                    <div className=" h-full">
+                        <Card className="lg:w-[400px] w-full lg:sticky lg:top-2">
                             <CardHeader>
                                 <CardTitle>{data.name}</CardTitle>
-                                <CardDescription className="text-xl mt-4">{data.info.price.toLocaleString()} zł</CardDescription>
+                                <div className="flex flex-wrap flex-col">
+                                    <span className="text-gray-400 text-lg">cena</span>
+                                    <p className="font-medium text-2xl whitespace-nowrap">{data.info.price.toLocaleString()} zł</p>
+                                </div>
                             </CardHeader>
                             <CardContent className="grid grid-cols-2">
-                                    <div className="flex flex-wrap flex-col">
-                                        <span className="text-gray-400">rok produkcji</span>
+                                <div className="flex flex-wrap flex-col">
+                                    <span className="text-gray-400">rok produkcji</span>
                                         <p className="font-medium">{data.info.year}</p>
                                     </div>
                                     <div className="flex flex-wrap flex-col">
@@ -90,7 +97,7 @@ export default async function page({ params }) {
                             </CardContent>
                         </Card>
                     </div>
-                </>
+                </div>
                 ): (<div className="py-10 w-full text-center"><p className="text-2xl">Niepoprawny odnościk - brak takiego zasobu</p>
                 <Link href="/" className="text-gray-400 text-lg">strona główna</Link> </div>)}
         </div>

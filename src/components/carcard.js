@@ -23,7 +23,9 @@ export default function Carcard({ reference , name = "brak nazwy", price = 0, ye
             }
 
             <CardHeader>
-                <Image src={photoURL} alt="Alfa Romeo Stelvio 2.0 Turbo Executive Q4" className="rounded-lg w-full" width={200} height={200}/>
+                <div className="h-[200px] w-full object-contain relative">
+                    <Image src={photoURL} alt="Alfa Romeo Stelvio 2.0 Turbo Executive Q4" className="rounded-lg w-[200px] object-contain h-full" fill={true}/>
+                </div>
             </CardHeader>
             <CardContent>
                 <CardTitle>{name}</CardTitle>
