@@ -1,6 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import ImageZoom from "react-image-zooom";
 
 export default function ImageSlider({ urls }) {
     const transformedUrls = urls.map(url => {
@@ -58,8 +59,8 @@ export default function ImageSlider({ urls }) {
                                 zIndex: index === imageIndex ? 10 : 0,
                             }}
                         >
-                            <img
-                                className="block flex-shrink-0 flex-grow-0 max-w-full max-h-full overflow-hidden object-fill select-none"
+                            <ImageZoom
+                                className="block flex-shrink-0 flex-grow-0 max-w-full max-h-full overflow-hidden object-fill select-none cursor-zoom-in"
                                 src={image}
                                 alt={`img${index + 1}`}
                             />
