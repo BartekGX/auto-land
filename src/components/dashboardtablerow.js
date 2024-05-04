@@ -11,6 +11,7 @@ import {
     AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import {useState} from "react";
+import Link from "next/link";
 
 export default function Dashboardtablerow({ item, index, setData }) {
     const [isPublic, setIsPublic] = useState(item.isPublic)
@@ -86,9 +87,12 @@ export default function Dashboardtablerow({ item, index, setData }) {
             <Switch  checked={isSold} onCheckedChange={handleChangeIsSold}/>
         </TableCell>
         <TableCell className="text-center">
-            <Button variant="ghost">
-                <Pencil className="mr-2 h-5 w-5"/>
-                <span>edytuj</span>
+            <Button variant="ghost" asChild>
+                <Link href={`/dashboard/edit/${item.reference}`} className="flex">
+                    <Pencil className="mr-2 h-5 w-5"/>
+                    <span>edytuj</span>
+                </Link>
+
             </Button>
             <AlertDialog>
                 <AlertDialogTrigger asChild>

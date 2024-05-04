@@ -1,4 +1,4 @@
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import parser from "html-react-parser"
 import "../../../components/tiptapstyle.css"
 import Link from "next/link";
@@ -22,7 +22,6 @@ const getData = async (name) => {
         return false
     }
 }
-
 export default async function page({ params }) {
     const { name } = params
     const data = await getData(name)
@@ -34,8 +33,13 @@ export default async function page({ params }) {
                     <div className="grid lg:grid-cols-[1fr_400px] grid-cols-1 gap-3 w-full">
                         <div className="w-full flex flex-col gap-2 row-start-2 lg:row-start-auto">
                             <Card className="flex justify-center">
-                                <ImageSlider urls={data.photos}/>
-                                {/*<Simpleimagesliderclient photos={data.photos}/>*/}
+                                {data.photos.length > 0 ? (
+                                    <ImageSlider urls={data.photos}/>
+                                ) : (
+                                    <div className="py-32">
+                                        brak zdjęć
+                                    </div>
+                                )}
                             </Card>
                             <Card className="w-full lg:hidden">
                                 <CardHeader>

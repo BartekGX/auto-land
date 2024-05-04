@@ -6,11 +6,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import Tiptap from "@/components/tiptap";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Moreinfocard from "@/components/moreinfocard";
 import Photodropzone from "@/components/photodropzone";
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {log} from "next/dist/server/typescript/utils";
+import {useRouter} from "next/navigation";
 
 export default function page() {
     const [name, setName] = useState("")
@@ -25,7 +24,19 @@ export default function page() {
     const [moreInfo, setMoreInfo] = useState([])
     const [files, setFiles] = useState([])
     const [file, setFile] = useState([])
+    const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState("")
 
+    useEffect(() => {
+        setIsLoading(false)
+    }, []);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setError("")
+        }, 5000)
+    }, [error])
 
     const addMoreInfo = () => {
         const demo = {name: "", value: ""}
@@ -65,6 +76,12 @@ export default function page() {
         }
     }
     const send = async () => {
+        if (name === "" || price === "" || year === "" || process === "" || power === "" || capacity === "" || fuel === "" || drive === "" || file.length === 0) {
+            setIsLoading(false)
+            setError("wypełnij podstatowe dane i główne zdjęcie")
+            return
+        }
+        setIsLoading(true)
         const photo = await sendFile(file)
         const photos = await sendFile(files)
         const info = {
@@ -93,6 +110,7 @@ export default function page() {
             if (!res.ok) {
                 throw new Error(await res.text())
             }
+            router.push("/dashboard")
         } catch (e) {
             console.log(e)
         }
@@ -113,8 +131,13 @@ export default function page() {
                         Opcje
                     </p>
                 </div>
+                {error !== "" && (
+                    <div className="sm:text-base text-sm text-center text-red-400">
+                        {error}
+                    </div>
+                )}
                 <div>
-                    <Button onClick={send}>
+                    <Button onClick={send} disabled={isLoading}>
                             Stwórz
                     </Button>
                 </div>
@@ -206,7 +229,7 @@ export default function page() {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="flex flex-col gap-1">
-                                {moreInfo.map((item, index) => <Moreinfocard key={index} data={item} setInfo={setMoreInfo} index={index}/>)}
+                                {moreInfo.map((item, index) => <Moreinfocard key={item.name + index} data={item} setInfo={setMoreInfo} index={index}/>)}
                                 <Button onClick={addMoreInfo} className="w-full">dodaj informację</Button>
                             </CardContent>
                         </Card>

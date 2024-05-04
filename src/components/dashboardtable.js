@@ -5,8 +5,6 @@ import {useState} from "react";
 
 export default function Dashboardtable({ _data }) {
     const [data, setData] = useState(_data);
-    console.log("test:2", _data)
-    console.log("test:4", data)
     return (
         <Table>
             <TableHeader>

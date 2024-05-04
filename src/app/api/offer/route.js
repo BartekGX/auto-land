@@ -3,8 +3,12 @@ import Offer from "../../../../models/offerModel";
 import {NextResponse} from "next/server";
 import diacritics from "diacritics";
 import {DeleteObjectCommand, S3Client} from "@aws-sdk/client-s3";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {getToken} from "next-auth/jwt";
 
 export const dynamic = 'force-dynamic';
+
 const s3Client = new S3Client({
     region: process.env.AWS_S3_REGION,
     credentials: {
@@ -21,7 +25,11 @@ function generateRandomString(length) {
     }
     return result;
 }
-export async function GET() {
+export async function GET(req) {
+    const session = await getToken({req, secret:process.env.NEXTAUTH_SECRET})
+    if (!session) {
+        return NextResponse.json({error: "User is not authenticated"}, {status: 401})
+    }
     try {
         await connectDB()
         const offers = await Offer.find({})
@@ -31,6 +39,10 @@ export async function GET() {
     }
 }
 export async function POST(req) {
+    const session = await getToken({req, secret:process.env.NEXTAUTH_SECRET})
+    if (!session) {
+        return NextResponse.json({error: "User is not authenticated"}, {status: 401})
+    }
     try {
         const {name, description, info, moreInfo, photos, photo} = await req.json();
         const noDiacritics = diacritics.remove(name)
@@ -43,6 +55,10 @@ export async function POST(req) {
     }
 }
 export async function PUT(req) {
+    const session = await getToken({req, secret:process.env.NEXTAUTH_SECRET})
+    if (!session) {
+        return NextResponse.json({error: "User is not authenticated"}, {status: 401})
+    }
     try {
         const id = req.nextUrl.searchParams.get("id")
         const updatedData = await req.json()
@@ -54,15 +70,28 @@ export async function PUT(req) {
     }
 }
 export async function DELETE(req) {
+    const session = await getToken({req, secret:process.env.NEXTAUTH_SECRET})
+    if (!session) {
+        return NextResponse.json({error: "User is not authenticated"}, {status: 401})
+    }
     const {reference, photo, photos} = await req.json()
-    const photosToDelete = photos.concat(photo)
-    console.log(photosToDelete)
+    console.log("photo", photo)
+    console.log("photos", photos)
+    let photosToDelete = []
+
+
+    if  (photo.length + photos.length === 0) NextResponse.json({error: "brak zdjęć do usunięcia"}, {status: 400})
+    else if (photo.length === 0) photosToDelete = photos
+    else if (photos.length === 0) photosToDelete = [photo]
+    else photosToDelete = [...photo, ...photos]
+    console.log("serwer: zdjecia do usuniecia", photosToDelete)
     try {
-        await connectDB()
-        await  Offer.findOneAndDelete({ reference: reference })
+        if (reference !== undefined) {
+            await connectDB()
+            await  Offer.findOneAndDelete({ reference: reference })
+        }
 
         for (const photoToDelete of photosToDelete) {
-            console.log("zdjecie", photoToDelete)
             const params = {
                 Bucket: process.env.AWS_S3_BUCKET_NAME,
                 Key: photoToDelete

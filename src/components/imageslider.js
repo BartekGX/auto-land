@@ -8,24 +8,6 @@ export default function ImageSlider({ urls }) {
         return `https://autoland-storage.s3.eu-central-1.amazonaws.com/${url}`
     });
     const [imageIndex, setImageIndex] = useState(0);
-    const touchStartX = useRef(0);
-    const touchEndX = useRef(0);
-
-    const handleTouchStart = (event) => {
-        touchStartX.current = event.touches[0].clientX;
-    };
-
-    const handleTouchMove = (event) => {
-        touchEndX.current = event.touches[0].clientX;
-    };
-
-    const handleTouchEnd = () => {
-        if (touchStartX.current - touchEndX.current > 50) {
-            showNextImg();
-        } else if (touchEndX.current - touchStartX.current > 50) {
-            showPrevImg();
-        }
-    };
 
     const showNextImg = () => {
         setImageIndex((index) => {
@@ -45,10 +27,7 @@ export default function ImageSlider({ urls }) {
         <div
             className="relative aspect-video group overflow-hidden aspect-w-16 aspect-h-9 w-full"
         >
-            <div className="flex h-full w-full overflow-hidden rounded-lg relative"
-                 onTouchStart={handleTouchStart}
-                 onTouchMove={handleTouchMove}
-                 onTouchEnd={handleTouchEnd}>
+            <div className="flex h-full w-full overflow-hidden rounded-lg relative">
                 {transformedUrls.map((image, index) => {
                     return (
                         <div

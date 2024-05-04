@@ -1,6 +1,7 @@
 import {S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import {NextResponse} from "next/server";
 import sharp from "sharp"
+import {getToken} from "next-auth/jwt";
 
 export const dynamic = 'force-dynamic';
 const s3Client = new S3Client({
@@ -25,6 +26,10 @@ async function uploadFileToS3(file, filename) {
 }
 
 export async function POST(req) {
+    const session = await getToken({req, secret:process.env.NEXTAUTH_SECRET})
+    if (!session) {
+        return NextResponse.json({error: "User is not authenticated"}, {status: 401})
+    }
     try {
         let fileNames = []
         const data = await req.formData();
@@ -67,6 +72,10 @@ export async function POST(req) {
     }
 }
 export async function DELETE(req) {
+    const session = await getToken({req, secret:process.env.NEXTAUTH_SECRET})
+    if (!session) {
+        return NextResponse.json({error: "User is not authenticated"}, {status: 401})
+    }
     const img = req.nextUrl.searchParams.get("img");
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,

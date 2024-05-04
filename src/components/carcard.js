@@ -14,7 +14,7 @@ export default function Carcard({ reference , name = "brak nazwy", price = 0, ye
     return (
         <Card className=" max-w-[350px] w-full relative overflow-hidden flex flex-col justify-between">
             {isSold &&
-            <div className={neue.className + " absolute w-full h-full backdrop-blur-sm hover:backdrop-blur-none hover:opacity-10 transition-all"}>
+            <div className={neue.className + " absolute w-full h-full backdrop-blur-sm hover:backdrop-blur-none hover:opacity-10 transition-all z-50"}>
                 <div className="absolute bg-black text-white flex flex-row flex-nowrap w-full text-center rotate-[6deg] top-[10%] text-3xl whitespace-nowrap"><div className="-translate-x-[10px] tracking-wider">SOLD OUT  SOLD OUT  SOLD OUT  SOLD OUT  SOLD OUT</div></div>
                 <div className="absolute bg-black text-white flex flex-row flex-nowrap w-full text-center -rotate-[15deg] top-[30%] text-3xl whitespace-nowrap"><div className="-translate-x-[4px] tracking-wider">SOLD OUT  SOLD OUT  SOLD OUT  SOLD OUT  SOLD OUT</div></div>
                 <div className="absolute bg-black text-white flex flex-row flex-nowrap w-full text-center rotate-[8deg] top-[55%] text-3xl whitespace-nowrap"><div className="-translate-x-[8px] tracking-wider">SOLD OUT  SOLD OUT  SOLD OUT  SOLD OUT  SOLD OUT</div></div>
