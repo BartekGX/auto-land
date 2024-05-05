@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import CryptoJS from "crypto-js";
 import {useSession} from "next-auth/react";
-import bcrypt from "bcryptjs";
 
 export default function page() {
     const [oldPassword, setOldPassword] = useState("")
@@ -36,7 +35,6 @@ export default function page() {
                     return null
                 }
                 const info = res.json()
-                console.log(info)
 
             } catch (e) {
                 console.log(e)

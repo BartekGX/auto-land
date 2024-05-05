@@ -49,11 +49,9 @@ export default function Dashboardtablerow({ item, index, setData }) {
         }
     }
     const deleteOffer = (reference, photo, photos) => {
-        console.log("test", reference)
         const toDelete = {
             reference, photo, photos
         }
-        console.log(toDelete)
         try {
             const res = fetch(`/api/offer`, {
                 method: "DELETE",

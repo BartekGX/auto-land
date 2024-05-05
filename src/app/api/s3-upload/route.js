@@ -34,7 +34,6 @@ export async function POST(req) {
         let fileNames = []
         const data = await req.formData();
         const files = data.getAll("file");
-        console.log("przysłane pliki", files)
         for (const file of files) {
             const extension = file.name.split('.').pop();
             const oldName = file.name.split('.')
@@ -53,11 +52,8 @@ export async function POST(req) {
                 })
                 .toFormat('jpg')
                 .toBuffer();
-            console.log(newFileName)
             const fileName = await uploadFileToS3(processedImage, newFileName);
-            console.log(fileName)
             fileNames.push(fileName)
-            console.log("fileNames", fileNames)
         }
         if (!files) return NextResponse.json( { error: "File is required."}, { status: 400 })
 

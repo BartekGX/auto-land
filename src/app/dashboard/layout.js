@@ -6,18 +6,17 @@ import Link from "next/link";
 
 export default function layout({ children }) {
     const { data: session } = useSession();
-    if (session) console.log(session)
     return (
         <div className="flex flex-col max-w-screen-2xl mx-auto">
             <div className="border-b-2 p-2 flex flex-row justify-between">
                 <div className="py-3">
                     <Link href="/dashboard">
-                        <h1 className="text-2xl">
+                        <h1 className="sm:text-2xl md:text-xl text-lg">
                             Dashboard Auto-Land
                         </h1>
                     </Link>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                     <div>
                         <Button asChild>
                             <Link href="/dashboard/changepassword">

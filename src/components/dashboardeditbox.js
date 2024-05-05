@@ -44,7 +44,6 @@ export default function Dashboardeditbox({ _data }) {
     }
 
     const sendFile = async (fileSF) => {
-        console.log(fileSF)
         const formData = new FormData()
         fileSF.forEach(file => {
             formData.append("file", file)
@@ -63,16 +62,12 @@ export default function Dashboardeditbox({ _data }) {
 
     const imageDrop = async (imageFiles) => {
         if (imageFiles) {
-            console.log("drop", imageFiles)
             setFiles(files.concat(imageFiles))
-            console.log("pliki", files)
         }
     }
     const mainImageDrop = async (imageFile) => {
         if (imageFile) {
-            console.log("drop", imageFile)
             setFile(imageFile)
-            console.log("pliki", file)
         }
     }
     const send = async () => {
@@ -103,7 +98,6 @@ export default function Dashboardeditbox({ _data }) {
             moreInfo: moreInfo,
             photos: photos
         }
-        console.log(data)
         try {
             const res = await fetch(`/api/offer?id=${_data.id}`, {
                 method: "PUT",
@@ -144,7 +138,6 @@ export default function Dashboardeditbox({ _data }) {
             photo: photoToDelete,
             photos: filesToDelete
         }
-        console.log(toDelete)
         if (photoToDelete.length + filesToDelete.length === 0) return
         try {
             const res = fetch(`/api/offer`, {

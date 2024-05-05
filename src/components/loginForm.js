@@ -84,7 +84,7 @@ export default function LoginForm() {
         <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-gray-950">
             <div>
                 <Card>
-                    <CardHeader>
+                    <CardHeader className="sm:p-3 p-0">
                         <div>
                             <p className="font-bold text-3xl text-center py-5">
                                 AUTO LAND
@@ -94,12 +94,12 @@ export default function LoginForm() {
                             Zaloguj się
                         </CardTitle>
                         <CardContent>
-                            <form onSubmit={handleSubmitLogin} className="flex gap-2 flex-col max-w-[350px] w-full mt-2">
-                                <div className="grid items-center gap-1.5 w-[350px]">
+                            <form onSubmit={handleSubmitLogin} className="flex gap-2 flex-col sm:max-w-[350px] w-ful  mt-2">
+                                <div className="grid items-center gap-1.5 sm:w-[350px] w-full">
                                     <Label htmlFor="login">Login</Label>
                                     <Input type="text" id="login" placeholder="Login" value={login} onChange={(e) => setLogin(e.target.value)}/>
                                 </div>
-                                <div className="grid items-center gap-1.5  max-w-[350px] w-full">
+                                <div className="grid items-center gap-1.5 sm:w-[350px] w-full">
                                     <Label htmlFor="password">Hasło</Label>
                                     <Input type="password" id="password" placeholder="Hasło" value={password} onChange={(e) => setPassword(e.target.value)}/>
                                 </div>

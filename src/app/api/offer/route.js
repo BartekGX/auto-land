@@ -75,8 +75,6 @@ export async function DELETE(req) {
         return NextResponse.json({error: "User is not authenticated"}, {status: 401})
     }
     const {reference, photo, photos} = await req.json()
-    console.log("photo", photo)
-    console.log("photos", photos)
     let photosToDelete = []
 
 
@@ -84,7 +82,6 @@ export async function DELETE(req) {
     else if (photo.length === 0) photosToDelete = photos
     else if (photos.length === 0) photosToDelete = [photo]
     else photosToDelete = [...photo, ...photos]
-    console.log("serwer: zdjecia do usuniecia", photosToDelete)
     try {
         if (reference !== undefined) {
             await connectDB()
