@@ -5,9 +5,10 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
 import Photodropzone from "@/components/photodropzone";
-import Moreinfocard from "@/components/moreinfocard";
 import Tiptap from "@/components/tiptap";
 import {useEffect, useState} from "react";
+import MoreInfoBox from "@/components/moreInfoBox";
+import {useRouter} from "next/navigation";
 
 export default function Dashboardeditbox({ _data }) {
 
@@ -26,6 +27,7 @@ export default function Dashboardeditbox({ _data }) {
     const [oldFiles, setOldFiles] = useState(_data.photos)
     const [file, setFile] = useState([])
     const [oldFile, setOldFile] = useState(_data.photo)
+    const router = useRouter()
 
     useEffect(() => {
         setPrice(prevState => {
@@ -106,6 +108,7 @@ export default function Dashboardeditbox({ _data }) {
             if (!res.ok) {
                 throw new Error(await res.text())
             }
+            router.push("/dashboard")
         } catch (e) {
             console.log(e)
         }
@@ -275,18 +278,19 @@ export default function Dashboardeditbox({ _data }) {
                                 </div>
                             </CardHeader>
                         </Card>
-                        <Card className="w-full">
-                            <CardHeader>
-                                <CardTitle className="text-center">
-                                    Dodatkowe informacje
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex flex-col gap-1">
-                                {moreInfo.map((item, index) => <Moreinfocard key={item.name + index} data={item}
-                                                                             setInfo={setMoreInfo} index={index}/>)}
-                                <Button onClick={addMoreInfo} className="w-full">dodaj informację</Button>
-                            </CardContent>
-                        </Card>
+                        <MoreInfoBox moreInfo={moreInfo} setMoreInfo={setMoreInfo}/>
+                        {/*<Card className="w-full">*/}
+                        {/*    <CardHeader>*/}
+                        {/*        <CardTitle className="text-center">*/}
+                        {/*            Dodatkowe informacje*/}
+                        {/*        </CardTitle>*/}
+                        {/*    </CardHeader>*/}
+                        {/*    <CardContent className="flex flex-col gap-1">*/}
+                        {/*        {moreInfo.map((item, index) => <Moreinfocard key={item.name + index} data={item}*/}
+                        {/*                                                     setInfo={setMoreInfo} index={index}/>)}*/}
+                        {/*        <Button onClick={addMoreInfo} className="w-full">dodaj informację</Button>*/}
+                        {/*    </CardContent>*/}
+                        {/*</Card>*/}
                     </div>
                 </div>
                 <div className="flex flex-col gap-2">

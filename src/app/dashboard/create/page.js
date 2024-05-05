@@ -10,6 +10,7 @@ import {useEffect, useState} from "react";
 import Moreinfocard from "@/components/moreinfocard";
 import Photodropzone from "@/components/photodropzone";
 import {useRouter} from "next/navigation";
+import MoreInfoBox from "@/components/moreInfoBox";
 
 export default function page() {
     const [name, setName] = useState("")
@@ -38,10 +39,7 @@ export default function page() {
         }, 5000)
     }, [error])
 
-    const addMoreInfo = () => {
-        const demo = {name: "", value: ""}
-        setMoreInfo(prevState => prevState.concat(demo))
-    }
+
 
     const sendFile = async (fileSF) => {
         const formData = new FormData()
@@ -216,17 +214,7 @@ export default function page() {
                                 </div>
                             </CardHeader>
                         </Card>
-                        <Card className="w-full">
-                            <CardHeader>
-                                <CardTitle className="text-center">
-                                    Dodatkowe informacje
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex flex-col gap-1">
-                                {moreInfo.map((item, index) => <Moreinfocard key={item.name + index} data={item} setInfo={setMoreInfo} index={index}/>)}
-                                <Button onClick={addMoreInfo} className="w-full">dodaj informację</Button>
-                            </CardContent>
-                        </Card>
+                        <MoreInfoBox moreInfo={moreInfo} setMoreInfo={setMoreInfo}/>
                     </div>
                 </div>
                 <div className="flex flex-col gap-2">

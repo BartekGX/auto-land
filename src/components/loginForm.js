@@ -13,6 +13,7 @@ export default function LoginForm() {
     const [login2, setLogin2] = useState("")
     const [email2, setEmail2] = useState("")
     const [password2, setPassword2] = useState("")
+    const [isSubmit, setIsSubmit] = useState(false)
 
     const router = useRouter()
 
@@ -40,6 +41,7 @@ export default function LoginForm() {
         if (!login2 || !password2 || !email2) return
 
         try {
+            setIsSubmit(true)
             const resUserExists = await fetch("api/userExists", {
                 method: "POST",
                 headers: {
@@ -69,7 +71,9 @@ export default function LoginForm() {
             if (res.ok) {
                 const form = e.target;
                 form.reset();
+                setIsSubmit(false)
             } else {
+                setIsSubmit(false)
                 console.log("User registration failed")
             }
         } catch (e) {
@@ -104,7 +108,7 @@ export default function LoginForm() {
                                     <Input type="password" id="password" placeholder="Hasło" value={password} onChange={(e) => setPassword(e.target.value)}/>
                                 </div>
                                 <div className="w-full mt-4">
-                                    <Button className="w-full">Zaloguj</Button>
+                                    <Button className="w-full" disabled={isSubmit}>Zaloguj</Button>
                                 </div>
                             </form>
                         </CardContent>
