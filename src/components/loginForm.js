@@ -110,30 +110,30 @@ export default function LoginForm() {
                         </CardContent>
                     </CardHeader>
                 </Card>
-                <Card>
-                    <CardHeader>
-                        Zarejestruj się
-                    </CardHeader>
-                    <CardContent>
-                        <form onSubmit={handleSubmitRegister}>
-                            <div className="grid items-center gap-1.5 w-[350px]">
-                                <Label htmlFor="login2">Login</Label>
-                                <Input type="text" id="login2" placeholder="example123" value={login2} onChange={(e) => setLogin2(e.target.value)}/>
-                            </div>
-                            <div className="grid items-center gap-1.5 w-[350px]">
-                                <Label htmlFor="email2">Email</Label>
-                                <Input type="email" id="email2" placeholder="example@example.com" value={email2} onChange={(e) => setEmail2(e.target.value)}/>
-                            </div>
-                            <div className="grid items-center gap-1.5 w-[350px]">
-                                <Label htmlFor="password2">Hasło</Label>
-                                <Input type="password" id="password2" value={password2} onChange={(e) => setPassword2(e.target.value)}/>
-                            </div>
-                            <div>
-                                <Button>zarejestruj się</Button>
-                            </div>
-                        </form>
-                    </CardContent>
-                </Card>
+                {/*<Card>*/}
+                {/*    <CardHeader>*/}
+                {/*        Zarejestruj się*/}
+                {/*    </CardHeader>*/}
+                {/*    <CardContent>*/}
+                {/*        <form onSubmit={handleSubmitRegister}>*/}
+                {/*            <div className="grid items-center gap-1.5 w-[350px]">*/}
+                {/*                <Label htmlFor="login2">Login</Label>*/}
+                {/*                <Input type="text" id="login2" placeholder="example123" value={login2} onChange={(e) => setLogin2(e.target.value)}/>*/}
+                {/*            </div>*/}
+                {/*            <div className="grid items-center gap-1.5 w-[350px]">*/}
+                {/*                <Label htmlFor="email2">Email</Label>*/}
+                {/*                <Input type="email" id="email2" placeholder="example@example.com" value={email2} onChange={(e) => setEmail2(e.target.value)}/>*/}
+                {/*            </div>*/}
+                {/*            <div className="grid items-center gap-1.5 w-[350px]">*/}
+                {/*                <Label htmlFor="password2">Hasło</Label>*/}
+                {/*                <Input type="password" id="password2" value={password2} onChange={(e) => setPassword2(e.target.value)}/>*/}
+                {/*            </div>*/}
+                {/*            <div>*/}
+                {/*                <Button>zarejestruj się</Button>*/}
+                {/*            </div>*/}
+                {/*        </form>*/}
+                {/*    </CardContent>*/}
+                {/*</Card>*/}
             </div>
         </div>
     )

@@ -5,14 +5,12 @@ import {useEffect, useState} from "react";
 import {Table, TableBody, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import Dashboardtablerow from "@/components/dashboardtablerow";
 
-const apiURL = process.env.API_URL
-
 export default function page() {
     const [data, setData] = useState([])
     const [isFetched, setIsFetched] = useState(false)
     const getData = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/api/offer`, {
+            const res = await fetch(`/api/offer`, {
                 method: "GET",
                 cache: "no-store"
             })

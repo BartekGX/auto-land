@@ -12,7 +12,6 @@ export async function POST(req) {
         await connectDB()
         const {email} = await req.json()
         const user = await UserModel.findOne({ email }).select("_id")
-        console.log("user", user)
         return NextResponse.json({ user});
     } catch (e) {
         console.log(e)

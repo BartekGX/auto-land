@@ -2,7 +2,7 @@
 
 import {Button} from "@/components/ui/button";
 import {signOut, useSession} from "next-auth/react";
-import { getSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function layout({ children }) {
     const { data: session } = useSession();
@@ -11,12 +11,23 @@ export default function layout({ children }) {
         <div className="flex flex-col max-w-screen-2xl mx-auto">
             <div className="border-b-2 p-2 flex flex-row justify-between">
                 <div className="py-3">
-                    <h1 className="text-2xl">
-                        Dashboard Auto-Land
-                    </h1>
+                    <Link href="/dashboard">
+                        <h1 className="text-2xl">
+                            Dashboard Auto-Land
+                        </h1>
+                    </Link>
                 </div>
-                <div className="flex items-center">
-                    <Button onClick={() => signOut()}>Wyloguj</Button>
+                <div className="flex items-center gap-2">
+                    <div>
+                        <Button asChild>
+                            <Link href="/dashboard/changepassword">
+                                Zmień hasło
+                            </Link>
+                        </Button>
+                    </div>
+                    <div>
+                        <Button onClick={() => signOut()}>Wyloguj</Button>
+                    </div>
                 </div>
             </div>
             <div>
