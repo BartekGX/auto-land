@@ -12,8 +12,11 @@ export default function page() {
     const [oldPassword, setOldPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [newPassword2, setNewPassword2] = useState("")
+    const [newLogin, setNewLogin] = useState("")
     const [success, setSuccess] = useState("")
+    const [successL, setSuccessL] = useState("")
     const [error, setError] = useState("")
+    const [errorL, setErrorL] = useState("")
     const [isSended, setIsSended] = useState(false)
     const { data: session } = useSession();
 
@@ -64,8 +67,31 @@ export default function page() {
             }
         }
     }
+
+    const sendL = async (e) => {
+        e.preventDefault()
+
+        try {
+            const res = await fetch("/api/chlog", {
+                method: "PUT",
+                body: JSON.stringify({login: newLogin})
+            })
+            if (!res.ok) {
+                setErrorL("Błąd podczas zmiany loginu")
+                setTimeout(() => {
+                    setErrorL("")
+                }, 5000)
+                return
+            }
+            const response = await res.json()
+            setSuccessL(`Pomyślnie zmieniono login na: ${response.newLogin}`)
+
+        } catch(e) {
+            console.log(e)
+        }
+    }
     return (
-        <div className="flex justify-center items-center py-20">
+        <div className="flex justify-center items-center py-20 gap-2 flex-col">
             <Card className="w-full max-w-[500px]">
                 <CardHeader>
                     <CardTitle>
@@ -97,6 +123,34 @@ export default function page() {
                         {error && (
                             <div className="bg-red-500 p-2 text-center rounded-md">
                                 {error}
+                            </div>
+                        )}
+                    </form>
+                </CardContent>
+            </Card>
+            <Card className="w-full max-w-[500px]">
+                <CardHeader>
+                    <CardTitle>
+                        Zmiana loginu
+                    </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={sendL} className="flex flex-col gap-2">
+                        <div className="grid w-full max-w-sm items-center gap-1.5 mx-auto">
+                            <Label htmlFor="login">Nowy login</Label>
+                            <Input type="text" id="login" placeholder="Login" value={newLogin} onChange={(e) => setNewLogin(e.target.value)}/>
+                        </div>
+                        <div>
+                            <Button className="w-full" disabled={isSended}>Zmień login</Button>
+                        </div>
+                        {successL && (
+                            <div className="bg-green-500 p-2 text-center rounded-md">
+                                {successL}
+                            </div>
+                        )}
+                        {errorL && (
+                            <div className="bg-red-500 p-2 text-center rounded-md">
+                                {errorL}
                             </div>
                         )}
                     </form>

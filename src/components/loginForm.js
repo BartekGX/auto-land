@@ -10,15 +10,14 @@ import { useRouter } from "next/navigation";
 export default function LoginForm() {
     const [login, setLogin] = useState("")
     const [password, setPassword] = useState("")
-    const [login2, setLogin2] = useState("")
-    const [email2, setEmail2] = useState("")
-    const [password2, setPassword2] = useState("")
     const [isSubmit, setIsSubmit] = useState(false)
+    const [error, setError] = useState("")
 
     const router = useRouter()
 
     const handleSubmitLogin = async (e) => {
         e.preventDefault()
+        setIsSubmit(true)
 
         if (!login || !password) return
         try {
@@ -27,7 +26,9 @@ export default function LoginForm() {
             })
 
             if (res.error) {
-                console.log("invalid credentials")
+                setError("błędne dane logowania")
+                setIsSubmit(false)
+                return
             }
             router.replace("/dashboard")
         } catch (e) {
@@ -35,54 +36,7 @@ export default function LoginForm() {
         }
 
     }
-    const handleSubmitRegister = async (e) => {
-        e.preventDefault()
-
-        if (!login2 || !password2 || !email2) return
-
-        try {
-            setIsSubmit(true)
-            const resUserExists = await fetch("api/userExists", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email2 })
-            })
-
-            const {user} = await resUserExists.json();
-
-            if(user) {
-                console.log("user already exists")
-                return
-            }
-
-            const res = await fetch('api/register', {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name: login2,
-                    email: email2,
-                    password: password2
-                })
-            })
-            if (res.ok) {
-                const form = e.target;
-                form.reset();
-                setIsSubmit(false)
-            } else {
-                setIsSubmit(false)
-                console.log("User registration failed")
-            }
-        } catch (e) {
-            console.log("Error during registration: ", e)
-        }
-
-
-    }
-
+    
 
     return (
         <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-gray-950">
@@ -110,34 +64,17 @@ export default function LoginForm() {
                                 <div className="w-full mt-4">
                                     <Button className="w-full" disabled={isSubmit}>Zaloguj</Button>
                                 </div>
+                                {
+                                    error && (
+                                        <div className="bg-red-500 p-2 rounded-md">
+                                            {error}
+                                        </div>
+                                    )
+                                }
                             </form>
                         </CardContent>
                     </CardHeader>
                 </Card>
-                {/*<Card>*/}
-                {/*    <CardHeader>*/}
-                {/*        Zarejestruj się*/}
-                {/*    </CardHeader>*/}
-                {/*    <CardContent>*/}
-                {/*        <form onSubmit={handleSubmitRegister}>*/}
-                {/*            <div className="grid items-center gap-1.5 w-[350px]">*/}
-                {/*                <Label htmlFor="login2">Login</Label>*/}
-                {/*                <Input type="text" id="login2" placeholder="example123" value={login2} onChange={(e) => setLogin2(e.target.value)}/>*/}
-                {/*            </div>*/}
-                {/*            <div className="grid items-center gap-1.5 w-[350px]">*/}
-                {/*                <Label htmlFor="email2">Email</Label>*/}
-                {/*                <Input type="email" id="email2" placeholder="example@example.com" value={email2} onChange={(e) => setEmail2(e.target.value)}/>*/}
-                {/*            </div>*/}
-                {/*            <div className="grid items-center gap-1.5 w-[350px]">*/}
-                {/*                <Label htmlFor="password2">Hasło</Label>*/}
-                {/*                <Input type="password" id="password2" value={password2} onChange={(e) => setPassword2(e.target.value)}/>*/}
-                {/*            </div>*/}
-                {/*            <div>*/}
-                {/*                <Button>zarejestruj się</Button>*/}
-                {/*            </div>*/}
-                {/*        </form>*/}
-                {/*    </CardContent>*/}
-                {/*</Card>*/}
             </div>
         </div>
     )
