@@ -3,6 +3,21 @@ import parser from "html-react-parser"
 import "../../../components/tiptapstyle.css"
 import Link from "next/link";
 import ImageSlider from "@/components/imageslider";
+import striptags from "striptags";
+
+export async function generateMetadata({ params }) {
+    const product = await fetch(`${process.env.API_URL}/api/offeru/meta/${params.name}`).then((res) => res.json())
+    console.log(product)
+    return {
+        title: product?.name || "zły odnościk",
+        applicationName: "AutoLand Import Samochodów z UE, USA i JAPONII",
+        siteName: 'AutoLand - AutoLand Import Samochodów z UE, USA i JAPONII',
+        description: striptags(product?.description) || "AutoLand Import Samochodów z UE, USA i JAPONII",
+        locale: 'pl_PL',
+        type: 'website',
+        keywords: "Rawa Mazowiecka Piotr Wójcik samochody na zamównienie sprowadzamy import USA UE Japonia"
+    }
+}
 
 const getData = async (name) => {
     const apiURL = process.env.API_URL
