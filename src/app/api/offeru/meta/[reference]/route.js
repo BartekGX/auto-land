@@ -1,5 +1,5 @@
 import {connectDB} from "../../../../../../utils/connect";
-import Offer from "../../../../../../models/OfferModel";
+import Offer from "../../../../../../models/offerModel";
 import {NextResponse} from "next/server";
 
 export const dynamic = 'force-dynamic';
