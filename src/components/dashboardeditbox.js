@@ -76,8 +76,10 @@ export default function Dashboardeditbox({ _data }) {
         await deleteFiles()
         let photo = ""
         let photos = oldFiles
-        if  (file.length > 0)
-            photo = await sendFile(file)
+        if  (file.length > 0) {
+            const photoInTable = await sendFile(file)
+            photo = photoInTable[0]
+        }
         else photo = oldFile
         if (files.length > 0) {
             const newPhotos = await sendFile(files)
@@ -92,8 +94,9 @@ export default function Dashboardeditbox({ _data }) {
             fuel: fuel,
             drive: drive
         }
+        console.log("photo", photo)
         const data= {
-            photo: photo[0],
+            photo: photo,
             name: name,
             description: description,
             info: info,
@@ -141,7 +144,7 @@ export default function Dashboardeditbox({ _data }) {
             photo: photoToDelete,
             photos: filesToDelete
         }
-        if (photoToDelete.length + filesToDelete.length === 0) return
+        if ((photoToDelete.length + filesToDelete.length) === 0) return
         try {
             const res = fetch(`/api/offer`, {
                 method: "DELETE",
