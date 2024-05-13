@@ -41,13 +41,11 @@ export default async function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center">
             <div className="w-full max-w-[1100px]">
-                <div className="flex justify-between w-full items-end py-2 border-[#27272a] md:px-0 px-1">
-                    <div>
-                    <h1 className="md:text-5xl sm:text-2xl text-lg font-bold py-3">Samochody</h1>
-                    </div>
-                    <div>
-                        ilość {data.length}
-                    </div>
+            <div className="w-full pt-2 md:px-0 px-1">
+                    <h1 className="md:text-3xl sm:text-2xl text-xl font-medium pt-3 text-center">OFERTA POJAZDÓW</h1>
+                </div>
+                <div className="w-full text-end">
+                    <p className="sm:text-xl text-lg">ilość {data.length}</p>
                 </div>
                 {data.length > 0 ? (
                 <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 m-2">
