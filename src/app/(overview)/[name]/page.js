@@ -40,7 +40,7 @@ const getData = async (name) => {
 export default async function page({ params }) {
     const { name } = params
     const data = await getData(name)
-
+    const allPhotos = [...data.photos, data.photo]
     return (
             <div className="flex relative sm:px-3 px-0 py-3 gap-2 md:flex-row flex-col-reverse w-full">
 
@@ -49,7 +49,7 @@ export default async function page({ params }) {
                         <div className="w-full flex flex-col gap-2 row-start-2 lg:row-start-auto">
                             <Card className="flex justify-center">
                                 {data.photos.length > 0 ? (
-                                    <ImageSlider urls={data.photos}/>
+                                    <ImageSlider urls={allPhotos}/>
                                 ) : (
                                     <div className="py-32">
                                         brak zdjęć
