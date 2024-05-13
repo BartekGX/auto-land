@@ -34,9 +34,11 @@ export default  function page({ params }) {
     return (
         <div>
             {isFetched ? (
+                data ? (
                 <Dashboardeditbox _data={data}/>
+                ) : <div>brak takiego ogłoszenia</div>
             ) : (
-                <div>błąd pobierania danych</div>
+                <div>pobieranie danych...</div>
             )}
         </div>
     )
