@@ -83,7 +83,7 @@ export default async function page({ params }) {
                                     </div>
                                     <div className="flex flex-wrap flex-col">
                                         <span className="text-gray-400">rodzaj paliwa</span>
-                                        <p className="font-medium">{data.info.fuel === "" ? "brak" : data.info.drive}</p>
+                                        <p className="font-medium">{data.info.fuel === "" ? "brak" : data.info.fuel}</p>
                                     </div>
                                     <div className="flex flex-wrap flex-col">
                                         <span className="text-gray-400">napęd</span>
