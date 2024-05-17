@@ -43,14 +43,7 @@ export async function POST(req) {
                 .resize(1920, 1080, {
                     fit: 'inside',
                     withoutEnlargement: true,
-                    background: {
-                        r: 0,
-                        b: 0,
-                        g: 0,
-                        alpha: 255
-                    }
                 })
-                .toFormat('jpg')
                 .toBuffer();
             const fileName = await uploadFileToS3(processedImage, newFileName);
             fileNames.push(fileName)
