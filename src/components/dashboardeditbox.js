@@ -9,6 +9,7 @@ import Tiptap from "@/components/tiptap";
 import {useEffect, useState} from "react";
 import MoreInfoBox from "@/components/moreInfoBox";
 import {useRouter} from "next/navigation";
+import imageCompression from 'browser-image-compression';
 
 export default function Dashboardeditbox({ _data }) {
 
@@ -39,6 +40,32 @@ export default function Dashboardeditbox({ _data }) {
         });
     }, []);
 
+    async function compressAndConvertImage(file) {
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+            fileType: 'image/jpeg',
+            initialQuality: 0.85
+        };
+
+        try {
+            const compressedFile = await imageCompression(file, options);
+            return compressedFile;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    async function compressFiles(files) {
+        const compressedFiles = [];
+        for (const file of files) {
+            const compressedFile = await compressAndConvertImage(file);
+            compressedFiles.push(compressedFile);
+        }
+        return compressedFiles;
+    }
+
+
     function chunkArray(array, size) {
         const result = [];
         for (let i = 0; i < array.length; i += size) {
@@ -48,7 +75,8 @@ export default function Dashboardeditbox({ _data }) {
     }
 
     async function sendFilesInChunks(files, chunkSize) {
-        const chunks = chunkArray(files, chunkSize);
+        const compressedFiles = await compressFiles(files);
+        const chunks = chunkArray(compressedFiles, chunkSize);
         let allNewPhotos = [];
 
         for (const chunk of chunks) {

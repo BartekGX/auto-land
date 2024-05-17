@@ -21,14 +21,7 @@ export default function Photodropzone({ onImageDrop, type }) {
         maxFiles: 1,
     };
     if (type === 'slider') {
-        dropzoneOptions.maxFiles = 60;
-    } else if (type === 'files') {
-        dropzoneOptions.accept = {
-            'application/zip': ['.zip'],
-            'application/msword': ['.doc', '.docx'],
-            'application/pdf': ['.pdf'],
-            'image/jpeg': ['.jpg', '.jpeg']
-        };
+        dropzoneOptions.maxFiles = 100;
     }
 
 
