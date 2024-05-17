@@ -210,8 +210,12 @@ export default function Dashboardeditbox({ _data }) {
                         Opcje
                     </p>
                 </div>
+                {isLoading && files.length > 0 && <div className="border-yellow-500 border-2 rounded-lg p-1 bg-yellow-500 bg-opacity-20 text-yellow-500">
+                    <p>Optymalizowanie i wysyłanie zdjęć</p>
+                </div>}
                 <div>
-                    <Button onClick={send} isDisabled={isLoading}>
+
+                    <Button onClick={send} disabled={isLoading}>
                         Zapisz
                     </Button>
                 </div>
