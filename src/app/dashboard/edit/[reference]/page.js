@@ -20,7 +20,6 @@ export default  function page({ params }) {
             const data = await res.json()
             setData(data[0])
             setIsFetched(true)
-            console.log(data)
         } catch (e) {
             console.log("błąd podczas pobierania danych")
             return false

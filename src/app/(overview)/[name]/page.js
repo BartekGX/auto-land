@@ -7,7 +7,6 @@ import striptags from "striptags";
 
 export async function generateMetadata({ params }) {
     const product = await fetch(`${process.env.API_URL}/api/offeru/meta/${params.name}`).then((res) => res.json())
-    console.log(product)
     return {
         title: product?.name || "zły odnościk",
         applicationName: "AutoLand Import Samochodów z UE, USA i JAPONII",

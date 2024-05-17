@@ -18,7 +18,6 @@ export async function PUT(req) {
     }
     try {
         const { value } = await req.json()
-        console.log(value)
         const decryptedOldPassword = decryptPassword(value[0], secretKey)
         const decryptedNewPassword = decryptPassword(value[1], secretKey)
         const decryptedUser = decryptPassword(value[2], secretKey)

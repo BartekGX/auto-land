@@ -17,7 +17,7 @@ export default function Dashboardeditbox({ _data }) {
     const [year, setYear] = useState(_data.info.year)
     const [process, setProcess] = useState(_data.info.process)
     const [power, setPower] = useState(_data.info.power)
-    const [capacity, setCapacity] = useState(_data.info.power)
+    const [capacity, setCapacity] = useState(_data.info.capacity)
     const [fuel, setFuel] = useState(_data.info.fuel)
     const [drive, setDrive] = useState(_data.info.drive)
     const [description, setDescription] = useState(_data.description);
@@ -28,7 +28,6 @@ export default function Dashboardeditbox({ _data }) {
     const [file, setFile] = useState([])
     const [oldFile, setOldFile] = useState(_data.photo)
     const router = useRouter()
-
     useEffect(() => {
         setPrice(prevState => {
             const stringPrice = `${prevState}`;
@@ -94,7 +93,6 @@ export default function Dashboardeditbox({ _data }) {
             fuel: fuel,
             drive: drive
         }
-        console.log("photo", photo)
         const data= {
             photo: photo,
             name: name,

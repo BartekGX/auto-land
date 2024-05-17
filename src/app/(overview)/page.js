@@ -25,7 +25,6 @@ export async function generateMetadata() {
     data.forEach((product, index) => {
         products += `${index + 1}. ${product.name} | cena ${product.info.price}zł\n`;
     });
-    console.log(products)
     return {
         title: "AutoLand Import Samochodów z UE, USA i JAPONII",
         siteName: 'AutoLand - Import Samochodów z UE, USA i JAPONII',
@@ -41,11 +40,8 @@ export default async function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center">
             <div className="w-full max-w-[1100px]">
-            <div className="w-full pt-2 md:px-0 px-1">
-                    <h1 className="md:text-3xl sm:text-2xl text-xl font-medium pt-3 text-center">OFERTA POJAZDÓW</h1>
-                </div>
-                <div className="w-full text-end">
-                    <p className="sm:text-xl text-lg">ilość {data.length}</p>
+                <div className="w-full pt-2 md:px-0 px-1">
+                    <h1 className="md:text-2xl sm:text-xl text-lg font-medium pt-3 text-center">OFERTA POJAZDÓW</h1>
                 </div>
                 {data.length > 0 ? (
                 <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 m-2">

@@ -4,7 +4,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import ImageZoom from "@/components/react-image-zooom";
 const link = `https://${process.env.AWS_S3_NAME}.s3.${process.env.AWS_S3_REGION_S}.amazonaws.com`
 export default function ImageSlider({ urls }) {
-    console.log(link);
     const transformedUrls = urls.map(url => {
         return `${link}/${url}`
     });
