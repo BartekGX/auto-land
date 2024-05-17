@@ -39,9 +39,24 @@ export default function Dashboardeditbox({ _data }) {
         });
     }, []);
 
-    const addMoreInfo = () => {
-        const demo = {name: "", value: ""}
-        setMoreInfo(prevState => prevState.concat(demo))
+    function chunkArray(array, size) {
+        const result = [];
+        for (let i = 0; i < array.length; i += size) {
+            result.push(array.slice(i, i + size));
+        }
+        return result;
+    }
+
+    async function sendFilesInChunks(files, chunkSize) {
+        const chunks = chunkArray(files, chunkSize);
+        let allNewPhotos = [];
+
+        for (const chunk of chunks) {
+            const newPhotos = await sendFile(chunk);
+            allNewPhotos = allNewPhotos.concat(newPhotos);
+        }
+
+        return allNewPhotos;
     }
 
     const sendFile = async (fileSF) => {
@@ -81,7 +96,7 @@ export default function Dashboardeditbox({ _data }) {
         }
         else photo = oldFile
         if (files.length > 0) {
-            const newPhotos = await sendFile(files)
+            const newPhotos = await sendFilesInChunks(files, 5)
             photos = photos.concat(newPhotos)
         }
         const info = {
