@@ -163,22 +163,26 @@ export default function Dashboardeditbox({ _data }) {
 
     }
     const removeImage = (index) => {
+        if (!isLoading)
         setFiles(prevState => {
             const newState = [...prevState]
             newState.splice(index, 1)
             return newState
         });
+        else return files
     }
     const removeOldImage = (index) => {
-        setFilesToDelete(prevState => {
-            const objectToAdd = oldFiles[index]
-            return [...prevState, objectToAdd]
-        })
-        setOldFiles(prevState => {
-            const newState = [...prevState]
-            newState.splice(index, 1)
-            return newState
-        });
+        if (!isLoading) {
+            setFilesToDelete(prevState => {
+                const objectToAdd = oldFiles[index]
+                return [...prevState, objectToAdd]
+            })
+            setOldFiles(prevState => {
+                const newState = [...prevState]
+                newState.splice(index, 1)
+                return newState
+            });
+        } else return oldFiles
     }
     const deleteFiles = () => {
         let photoToDelete = []
