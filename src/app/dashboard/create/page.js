@@ -1,16 +1,15 @@
 "use client"
 
 import {Button} from "@/components/ui/button";
-import Link from "next/link";
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import Tiptap from "@/components/tiptap";
 import {useEffect, useState} from "react";
-import Moreinfocard from "@/components/moreinfocard";
 import Photodropzone from "@/components/photodropzone";
 import {useRouter} from "next/navigation";
 import MoreInfoBox from "@/components/moreInfoBox";
+import imageCompression from "browser-image-compression";
 
 export default function page() {
     const [name, setName] = useState("")
@@ -39,6 +38,52 @@ export default function page() {
         }, 5000)
     }, [error])
 
+    async function compressAndConvertImage(file) {
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+            fileType: 'image/jpeg',
+            initialQuality: 0.85
+        };
+
+        try {
+            const compressedFile = await imageCompression(file, options);
+            return compressedFile;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    async function compressFiles(files) {
+        const compressedFiles = [];
+        for (const file of files) {
+            const compressedFile = await compressAndConvertImage(file);
+            compressedFiles.push(compressedFile);
+        }
+        return compressedFiles;
+    }
+
+
+    function chunkArray(array, size) {
+        const result = [];
+        for (let i = 0; i < array.length; i += size) {
+            result.push(array.slice(i, i + size));
+        }
+        return result;
+    }
+
+    async function sendFilesInChunks(files, chunkSize) {
+        const compressedFiles = await compressFiles(files);
+        const chunks = chunkArray(compressedFiles, chunkSize);
+        let allNewPhotos = [];
+
+        for (const chunk of chunks) {
+            const newPhotos = await sendFile(chunk);
+            allNewPhotos = allNewPhotos.concat(newPhotos);
+        }
+
+        return allNewPhotos;
+    }
 
 
     const sendFile = async (fileSF) => {
@@ -76,7 +121,7 @@ export default function page() {
         }
         setIsLoading(true)
         const photo = await sendFile(file)
-        const photos = await sendFile(files)
+        const photos = await sendFilesInChunks(files, 5)
         const info = {
             price: parseInt(price.replace(/\s/g, '')) || 0,
             year: parseInt(year) || 0,

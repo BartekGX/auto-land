@@ -29,6 +29,7 @@ export default function Dashboardeditbox({ _data }) {
     const [file, setFile] = useState([])
     const [oldFile, setOldFile] = useState(_data.photo)
     const router = useRouter()
+    const [isLoading, setIsLoading] = useState(false)
     useEffect(() => {
         setPrice(prevState => {
             const stringPrice = `${prevState}`;
@@ -115,6 +116,7 @@ export default function Dashboardeditbox({ _data }) {
         }
     }
     const send = async () => {
+        setIsLoading(true)
         await deleteFiles()
         let photo = ""
         let photos = oldFiles
@@ -152,8 +154,10 @@ export default function Dashboardeditbox({ _data }) {
             if (!res.ok) {
                 throw new Error(await res.text())
             }
+            setIsLoading(false)
             router.push("/dashboard")
         } catch (e) {
+            setIsLoading(false)
             console.log(e)
         }
 
@@ -207,7 +211,7 @@ export default function Dashboardeditbox({ _data }) {
                     </p>
                 </div>
                 <div>
-                    <Button onClick={send}>
+                    <Button onClick={send} isDisabled={isLoading}>
                         Zapisz
                     </Button>
                 </div>
