@@ -25,7 +25,7 @@ export default function Carcard({ reference , name = "brak nazwy", price = 0, ye
             <CardHeader>
                 <div className="h-[200px] w-full object-contain relative">
                     {
-                        photoURL === "" ?
+                        photoURL !== "" ?
                         <Image src={photoURL} alt={photoURL} className="rounded-lg w-[200px] object-contain h-full" fill={true}/> :
                         <p>brak zdjęcia</p>
                     }
