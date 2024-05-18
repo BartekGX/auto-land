@@ -44,7 +44,7 @@ export default function page() {
             maxWidthOrHeight: 720,
             useWebWorker: true,
             fileType: 'image/jpeg',
-            initialQuality: 0.75
+            initialQuality: 0.90
         };
 
         try {

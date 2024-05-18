@@ -43,11 +43,11 @@ export default function Dashboardeditbox({ _data }) {
 
     async function compressAndConvertImage(file) {
         const options = {
-            maxSizeMB: 1,
-            maxWidthOrHeight: 1920,
+            maxSizeMB: 0.6,
+            maxWidthOrHeight: 720,
             useWebWorker: true,
             fileType: 'image/jpeg',
-            initialQuality: 0.85
+            initialQuality: 0.90
         };
 
         try {
