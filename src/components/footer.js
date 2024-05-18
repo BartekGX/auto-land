@@ -5,38 +5,11 @@ export default function Footer() {
         <div className="w-full border-t-2 border-gray-600 md:p-5 p-2 grid md:grid-cols-3 grid-cols-1">
             <div className="w-full flex md:justify-center">
                 <div className="md:mx-auto">
-                    <div className="flex flex-col gap-1">
-                        <div className="flex gap-2">
+                    <div className="flex flex-col gap-1 justify-center">
+                        <div className="flex gap-2 ">
                             <div>
                                 <p className="md:text-xl text-lg">AUTO-LAND Piotr Wójcik</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div className="md:mx-auto">
-                    <div className="flex flex-col gap-1">
-                        <div className="flex gap-2 flex-col">
-                            <div className="flex gap-2 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                     className="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                          d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                </svg>
-                                <p className="md:text-lg text-base">+48 602 22 00 44</p>
-                            </div>
-                            <div className="flex gap-2 items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                     className="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd"
-                                          d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                </svg>
-                                <p className="md:text-lg text-base">+48 752 37 00 37</p>
-                            </div>
-                        </div>
-                        <Link href="https://maps.app.goo.gl/3SB5pTGPmCTKRHkR7" target="_blank">
-                            <div className="flex items-center gap-1 hover:text-gray-400">
+                                <div className="flex items-center gap-1 hover:text-gray-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                      className="bi bi-pin-map-fill" viewBox="0 0 16 16">
                                     <path fillRule="evenodd"
@@ -44,8 +17,36 @@ export default function Footer() {
                                     <path fillRule="evenodd"
                                           d="M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
                                 </svg>
-                                <p className="md:text-lg text-base">Tulipanowa 2b 96-200 Rawa Mazowiecka</p>
+                                <p className="md:text-lg text-base">Tulipanowa 2b <br/> 96-200 Rawa Mazowiecka</p>
                             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex">
+                <div className="md:mx-auto">
+                    <div className="flex flex-col gap-1 mx-auto">
+                        <div className="flex gap-2 flex-col">
+                            <div className="flex gap-2 items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                     className="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                    <path fillRule="evenodd"
+                                          d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                </svg>
+                                <p className="md:text-lg text-base">+48 602 22 00 44</p>
+                            </div>
+                            <div className="flex gap-2 items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                     className="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                    <path fillRule="evenodd"
+                                          d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                                </svg>
+                                <p className="md:text-lg text-base">+48 752 37 00 37</p>
+                            </div>
+                        </div>
+                        <Link href="https://maps.app.goo.gl/3SB5pTGPmCTKRHkR7" target="_blank">
+                            
                         </Link>
                         <div className="flex items-center gap-1">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -58,7 +59,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <div className="w-full flex md:justify-center">
+            <div className="w-full flex justify-center">
                 <div className="flex flex-col gap-1">
                     <Link href="https://www.instagram.com/piotr_wojcik_autoland/" target="_blank"><div className="flex items-center gap-1 hover:text-gray-400">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-instagram" viewBox="0 0 16 16">
