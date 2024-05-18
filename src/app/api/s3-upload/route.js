@@ -40,10 +40,6 @@ export async function POST(req) {
             const newFileName = `${oldName[0]}-${Date.now()}.${extension}`;
             const buffer = Buffer.from(await file.arrayBuffer());
             const processedImage = await sharp(buffer)
-                .resize(1920, 1080, {
-                    fit: 'inside',
-                    withoutEnlargement: true,
-                })
                 .toBuffer();
             const fileName = await uploadFileToS3(processedImage, newFileName);
             fileNames.push(fileName)
