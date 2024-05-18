@@ -40,11 +40,11 @@ export default function page() {
 
     async function compressAndConvertImage(file) {
         const options = {
-            maxSizeMB: 1,
-            maxWidthOrHeight: 1920,
+            maxSizeMB: 0.7,
+            maxWidthOrHeight: 720,
             useWebWorker: true,
             fileType: 'image/jpeg',
-            initialQuality: 0.85
+            initialQuality: 0.75
         };
 
         try {
