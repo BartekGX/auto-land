@@ -41,7 +41,7 @@ export default function page() {
     async function compressAndConvertImage(file) {
         const options = {
             maxSizeMB: 0.7,
-            maxWidthOrHeight: 720,
+            maxWidthOrHeight: 1280,
             useWebWorker: true,
             fileType: 'image/jpeg',
             initialQuality: 0.90
