@@ -27,6 +27,8 @@ export default function page() {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState("")
+    const [stateOfSend, setStateOfSend] = useState(0)
+    const [packages, setPackages] = useState(0)
 
     useEffect(() => {
         setIsLoading(false)
@@ -57,6 +59,10 @@ export default function page() {
     async function compressFiles(files) {
         const compressedFiles = [];
         for (const file of files) {
+            setStateOfSend(prevState => {
+                const newState = prevState + 1
+                return newState
+            })
             const compressedFile = await compressAndConvertImage(file);
             compressedFiles.push(compressedFile);
         }
@@ -76,9 +82,15 @@ export default function page() {
         const compressedFiles = await compressFiles(files);
         const chunks = chunkArray(compressedFiles, chunkSize);
         let allNewPhotos = [];
-
+        setPackages(chunks.length)
+        setStateOfSend(0)
         for (const chunk of chunks) {
+            setStateOfSend(prevState => {
+                const newState = prevState + 1
+                return newState
+            })
             const newPhotos = await sendFile(chunk);
+            console.log("część", chunk)
             allNewPhotos = allNewPhotos.concat(newPhotos);
         }
 
@@ -119,6 +131,7 @@ export default function page() {
             setError("wypełnij podstatowe dane i główne zdjęcie")
             return
         }
+        setPackages(files.length)
         setIsLoading(true)
         const photo = await sendFile(file)
         const photos = await sendFilesInChunks(files, 5)
@@ -173,6 +186,9 @@ export default function page() {
                         {error}
                     </div>
                 )}
+                {isLoading && files.length > 0 && <div className="border-yellow-500 border-2 rounded-lg p-1 bg-yellow-500 bg-opacity-20 text-yellow-500">
+                    <p>{packages === files.length ? "Optymalizowanie zdjęć" : "Wysyłanie zdjęć"} {stateOfSend}/{packages}</p>
+                </div>}
                 <div>
                     <Button onClick={send} disabled={isLoading}>
                             Stwórz

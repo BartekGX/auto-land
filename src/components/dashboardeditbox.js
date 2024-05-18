@@ -30,6 +30,8 @@ export default function Dashboardeditbox({ _data }) {
     const [oldFile, setOldFile] = useState(_data.photo)
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
+    const [stateOfSend, setStateOfSend] = useState(0)
+    const [packages, setPackages] = useState(0)
     useEffect(() => {
         setPrice(prevState => {
             const stringPrice = `${prevState}`;
@@ -60,6 +62,10 @@ export default function Dashboardeditbox({ _data }) {
     async function compressFiles(files) {
         const compressedFiles = [];
         for (const file of files) {
+            setStateOfSend(prevState => {
+                const newState = prevState+1
+                return newState
+            })
             const compressedFile = await compressAndConvertImage(file);
             compressedFiles.push(compressedFile);
         }
@@ -72,6 +78,7 @@ export default function Dashboardeditbox({ _data }) {
         for (let i = 0; i < array.length; i += size) {
             result.push(array.slice(i, i + size));
         }
+        setPackages(result.length)
         return result;
     }
 
@@ -79,8 +86,12 @@ export default function Dashboardeditbox({ _data }) {
         const compressedFiles = await compressFiles(files);
         const chunks = chunkArray(compressedFiles, chunkSize);
         let allNewPhotos = [];
-
+        setStateOfSend(0)
         for (const chunk of chunks) {
+            setStateOfSend(prevState => {
+                const newState = prevState+1
+                return newState
+            })
             const newPhotos = await sendFile(chunk);
             allNewPhotos = allNewPhotos.concat(newPhotos);
         }
@@ -126,6 +137,7 @@ export default function Dashboardeditbox({ _data }) {
         }
         else photo = oldFile
         if (files.length > 0) {
+            setPackages(files.length)
             const newPhotos = await sendFilesInChunks(files, 5)
             photos = photos.concat(newPhotos)
         }
@@ -199,9 +211,6 @@ export default function Dashboardeditbox({ _data }) {
                 method: "DELETE",
                 body: JSON.stringify(toDelete)
             })
-            if (!res.ok) {
-                console.log("błąd usuwania zdjęć");
-            }
         } catch (e) {
             console.log("błąd usuwania zdjęć")
         }
@@ -215,7 +224,7 @@ export default function Dashboardeditbox({ _data }) {
                     </p>
                 </div>
                 {isLoading && files.length > 0 && <div className="border-yellow-500 border-2 rounded-lg p-1 bg-yellow-500 bg-opacity-20 text-yellow-500">
-                    <p>Optymalizowanie i wysyłanie zdjęć</p>
+                    <p>{packages === files.length ? "Optymalizowanie zdjęć" : "Wysyłanie zdjęć"} {stateOfSend}/{packages}</p>
                 </div>}
                 <div>
 
