@@ -39,7 +39,7 @@ const getData = async (name) => {
 export default async function page({ params }) {
     const { name } = params
     const data = await getData(name)
-    const allPhotos = [...data.photos, data.photo]
+    const allPhotos = data ? [...data.photos, data.photo] : []
     return (
             <div className="flex relative sm:px-3 px-0 py-3 gap-2 md:flex-row flex-col-reverse w-full">
 
