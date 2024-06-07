@@ -14,13 +14,18 @@ export default function RootLayout({ children }) {
   return (
       <html lang="pl" className={inter.className}>
       <head>
-        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-N4GXRJQPNL"></Script>
+        <Script 
+              async 
+              src="https://www.googletagmanager.com/gtag/js?id=G-N4GXRJQPNL">
+        </Script>
         <script>
-          {'window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-N4GXRJQPNL');'}
-</script>
+          {'
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-N4GXRJQPNL')
+          '}
+        </script>
       </head>
       <body>
           <AuthProvider>
