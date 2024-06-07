@@ -9,7 +9,7 @@ const S3Region = process.env.AWS_S3_REGION;
 const neue = Bebas_Neue({ subsets: ["latin"], weight: "400" });
 export default function Carcard({ reference , name = "brak nazwy", price = 0, yearProduction = "brak", process = 0, power = 0, engineSize = 0, fuel = "brak", drive = "brak", isSold, photo}) {
 
-    const photoURL = `https://${S3BucketName}.s3.${S3Region}.amazonaws.com/${photo}`
+    const photoURL = `https://autolandstorage.s3.eu-north-1.amazonaws.com/${photo}`
 
     return (
         <Card className=" max-w-[350px] w-full relative overflow-hidden flex flex-col justify-between">
