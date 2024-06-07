@@ -335,7 +335,7 @@ export default function Dashboardeditbox({ _data }) {
                                         ) : (
                                             <div
                                                 className="flex justify-center items-center max-w-full max-h-[300px] object-contain overflow-hidden relative">
-                                                <img src={`https://autoland-storage.s3.eu-central-1.amazonaws.com/${oldFile}`} alt={oldFile}
+                                                <img src={`https://autolandstorage.s3.eu-north-1.amazonaws.com/${oldFile}`} alt={oldFile}
                                                      className="object-contain select-none w-full max-h-[300px]"/>
                                             </div>
                                         )}
