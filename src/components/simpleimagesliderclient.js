@@ -3,7 +3,7 @@ import SimpleImageSlider from "react-simple-image-slider";
 
 export default function Simpleimagesliderclient({ photos }) {
     const transformedUrls = photos.map(url => {
-        return `https://autoland-storage.s3.eu-central-1.amazonaws.com/${url}`
+        return `https://autolandstorage.s3.eu-north-1.amazonaws.com/${url}`
     })
     const imgs = transformedUrls.map(image => {
             return {url: image}

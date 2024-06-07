@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import ImageZoom from "@/components/react-image-zooom";
-const link = `https://${process.env.AWS_S3_NAME}.s3.${process.env.AWS_S3_REGION_S}.amazonaws.com`
+const link = `https://autolandstorage.s3.eu-north-1.amazonaws.com`
 export default function ImageSlider({ urls }) {
     const transformedUrls = urls.map(url => {
         return `${link}/${url}`
