@@ -404,7 +404,7 @@ export default function Dashboardeditbox({ _data }) {
                                                 </svg>
                                             </div>
                                             <div className="flex justify-center items-center">
-                                                <img src={`https://autoland-storage.s3.eu-central-1.amazonaws.com/${_file}`} alt={_file.name} width={100}
+                                                <img src={`https://autolandstorage.s3.eu-north-1.amazonaws.com/${_file}`} alt={_file.name} width={100}
                                                      height={100} className="object-contain object-center select-none"/>
                                             </div>
                                         </div>

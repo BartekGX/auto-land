@@ -14,10 +14,10 @@ export default function Photodropzone({ onImageDrop, type }) {
                 onImageDrop(acceptedFiles);
             }
         },
-        accept: {
-            'image/png': ['.png'],
-            'image/jpeg': ['.jpg', '.jpeg']
-        },
+        // accept: {
+        //     'image/png': ['.png'],
+        //     'image/jpeg': ['.jpg', '.jpeg']
+        // },
         maxFiles: 1,
     };
     if (type === 'slider') {
