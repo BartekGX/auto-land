@@ -22,6 +22,7 @@ const offerSchema= new mongoose.Schema({
         photos: { type: [String], default: []},
         isPublic: { type: Boolean, default: false },
         isSold: { type: Boolean, default: false },
+        position: Number,
     },
     {
         timestamps: true

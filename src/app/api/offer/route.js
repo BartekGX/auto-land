@@ -32,7 +32,7 @@ export async function GET(req) {
     }
     try {
         await connectDB()
-        const offers = await Offer.find({})
+        const offers = await Offer.find({}).sort({ position: 1 })
         return NextResponse.json(offers)
     } catch (e) {
         console.log(e)
