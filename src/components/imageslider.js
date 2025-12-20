@@ -39,7 +39,7 @@ export default function ImageSlider({ urls }) {
                             }}
                         >
                             <ImageZoom
-                                className="block flex-shrink-0 flex-grow-0 w-auto h-full overflow-hidden object-contain select-none cursor-zoom-in fullImageZoom basis-auto"
+                                className="w-full h-full object-contain select-none cursor-zoom-in"
                                 src={image}
                                 alt={`img${index + 1}`}
                                 zoom="250"
