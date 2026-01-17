@@ -6,6 +6,7 @@ import ImageSlider from "@/components/imageslider";
 import striptags from "striptags";
 
 export async function generateMetadata({ params }) {
+    const canonicalUrl = `${process.env.API_URL}/${params.name}`
     const product = await fetch(`${process.env.API_URL}/api/offeru/meta/${params.name}`).then((res) => res.json())
     return {
         title: product?.name || "zły odnościk",
@@ -14,7 +15,10 @@ export async function generateMetadata({ params }) {
         description: striptags(product?.description) || "AutoLand Import Samochodów z UE, USA i JAPONII",
         locale: 'pl_PL',
         type: 'website',
-        keywords: "Rawa Mazowiecka Piotr Wójcik samochody na zamównienie sprowadzamy import USA UE Japonia"
+        keywords: "Rawa Mazowiecka Piotr Wójcik samochody na zamównienie sprowadzamy import USA UE Japonia",
+        alternates: {
+      canonical: canonicalUrl,
+    },
     }
 }
 

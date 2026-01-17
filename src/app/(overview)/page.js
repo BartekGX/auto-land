@@ -20,13 +20,17 @@ const getData = async () => {
 }
 
 export async function generateMetadata() {
+    const canonicalUrl = `${process.env.API_URL}`
     return {
         title: "AutoLand Import Samochodów z UE, USA i JAPONII",
         siteName: 'AutoLand - Import Samochodów z UE, USA i JAPONII',
         description: 'AutoLand Piotr Wójcik - Import Samochodów z UE, USA i JAPONII, Rawa Mazowiecka. Kontakt: +48 602 22 00 44 | +48 572 37 00 37',
         locale: 'pl_PL',
         type: 'website',
-        keywords: "Rawa Mazowiecka Piotr Wójcik samochody na zamównienie sprowadzamy import USA UE Japonia"
+        keywords: "Rawa Mazowiecka Piotr Wójcik samochody na zamównienie sprowadzamy import USA UE Japonia",
+         alternates: {
+      canonical: canonicalUrl,
+    },
     }
 }
 

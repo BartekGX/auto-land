@@ -9,6 +9,8 @@ export default function ImageSlider({ urls }) {
     });
     const [imageIndex, setImageIndex] = useState(0);
 
+
+
     const showNextImg = () => {
         setImageIndex((index) => {
             if (index === urls.length - 1) return 0;
