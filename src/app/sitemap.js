@@ -1,7 +1,12 @@
+export const dynamic = "force-dynamic";
+
 const getMeta = async () => {
     let res = [];
+
     try {
-        res = await fetch(`${process.env.API_URL}/api/offeru/meta`)
+        res = await fetch(`${process.env.API_URL}/api/offeru/meta`, {
+            cache: "no-store"
+        })
             .then(response => response.json())
             .catch(e => {
                 console.error(e);
@@ -11,11 +16,13 @@ const getMeta = async () => {
         console.error(e);
         res = [];
     }
+
     return res;
 };
 
 export default async function sitemap() {
-    const data = await getMeta()
+    const data = await getMeta();
+
     const products = data.map(item => ({
         url: `${process.env.API_URL}/${item.reference}`,
         lastModified: new Date(item.updatedAt)
@@ -23,7 +30,8 @@ export default async function sitemap() {
 
     return [
         {
-            url: `${process.env.API_URL}`
+            url: `${process.env.API_URL}`,
+            lastModified: new Date()
         },
         ...products
     ];
