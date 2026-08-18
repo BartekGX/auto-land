@@ -25,6 +25,13 @@ function generateRandomString(length) {
     }
     return result;
 }
+function slugify(text) {
+    return diacritics.remove(text)
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+}
 export async function GET(req) {
     const session = await getToken({req, secret:process.env.NEXTAUTH_SECRET})
     if (!session) {
@@ -45,8 +52,7 @@ export async function POST(req) {
     }
     try {
         const {name, description, info, moreInfo, photos, photo} = await req.json();
-        const noDiacritics = diacritics.remove(name)
-        const reference = noDiacritics.replace(/\s+/g, '-') + "-" +  generateRandomString(4)
+        const reference = (slugify(name) || "oferta") + "-" + generateRandomString(4)
         await connectDB()
         await Offer.create({ name, description, info, moreInfo, photo, photos, reference})
         return NextResponse.json({message: "Oferta stworzona"}, {status: 201})
